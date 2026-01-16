@@ -1,15 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
+public class ContadorVisitasPaginas {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Map<String, Integer> Paginas = new HashMap<>();
+        Scanner sc = new Scanner(System.in);
+        String visita;
+        int j=3;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        while(j==3) {
+            //se iguala la variable numvisitas a 0 para que, en caso que no haya sido agregado, ponerle 0
+            int numVisitas = 0;
+            System.out.println("Introduce la pagina visitada (fin para terminar):");
+            visita = sc.nextLine().toLowerCase();
+            //si lo introducido por consola es "fin" se acaba el programa, sino cuenta como pagina visitada
+            if (visita.equals("fin")) {
+                j=0;
+            }else{
+                    //si la pagina no ha sido visitada aun entonces no se iguala su numero de visitas a la variable numvisitas
+                    if (Paginas.get(visita) != null) {
+                        //en caso contrario si
+                        numVisitas = Paginas.get(visita);
+                    }
+                    //pase lo que pase se añade 1 visita nueva ya que esa pagina habra sido visitada 1 vez mas, por eso inicializamos numVisita a 0
+                    numVisitas++;
+                    Paginas.put(visita, numVisitas);
+            }
         }
+        //patra acabar se muestra la cantidad de paginas con sus visitas
+        for (String key : Paginas.keySet()) {
+            System.out.println(key + " - " + Paginas.get(key));
+        }
+        System.out.println("Programa apagado");
     }
 }
